@@ -1,13 +1,24 @@
 #include <M5StickC.h>
+#include <WiFi.h>
+#include "Wi-Fi.h"
+
+const char *ssid = wifi_ssid;
+const char *password = wifi_password;
+
+int PIN = 36;
+
+void ota();
 
 void setup()
 {
   M5.begin();
-  M5.Lcd.fillScreen(WHITE);
-  M5.Lcd.print("Hello World!");
+  ota();
+
+  pinMode(PIN, ANALOG);
 }
 
 void loop()
 {
-  M5.update();
+  Serial.printf("G36: %04d\n", analogRead(PIN));
+  delay(500);
 }
