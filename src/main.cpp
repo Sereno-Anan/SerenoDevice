@@ -7,12 +7,9 @@ const char *password = wifi_password;
 
 int PIN = 36;
 
-void ota();
-
 void setup()
 {
   M5.begin();
-  ota();
 
   pinMode(PIN, ANALOG);
 }
