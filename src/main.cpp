@@ -1,21 +1,13 @@
 #include <M5StickC.h>
+#include "Sensor.hpp"
 
-int PIN =36;
-int sen;
+Sensor sen;
+
 void setup(){
-    M5.begin();
-
-    pinMode(PIN,ANALOG);
+  M5.begin();
+  sen.setPin(36);
 }
 
 void loop(){
-  if(analogRead(PIN)>0){
-    sen=1;
-    Serial.printf("%d\n",sen);
-    delay(300);
-  }else{
-    sen=0;
-    Serial.printf("%d\n",sen);
-    delay(3000);
-  }
+  sen.getValue();
 }
