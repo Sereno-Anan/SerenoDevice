@@ -1,17 +1,19 @@
-#include <WiFi.cpp>
+#ifndef COMMUNICATION_HPP
+#define COMMUNICATION_HPP
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
-
-extern const int capacity;
-extern char *url;
-extern char *wifi_ssid;
-extern char *wifi_password;
 
 class Communication
 {
 private:
     HTTPClient http;
+    char *ssid;
+    char *password;
+    char *host;
 public:
+    void setWiFi(char *wifi_ssid, char *wifi_password);
+    void setHost(char *url);
     void connectWiFi(); //WiFiに接続
-    StaticJsonDocument<capacity> post(StaticJsonDocument<capacity> json_request);  //APIをたたく
+    StaticJsonDocument<JSON_OBJECT_SIZE(10)> post(StaticJsonDocument<JSON_OBJECT_SIZE(10)> json_request);  //APIをたたく
 };
+#endif // COMMUNICATION_HPP

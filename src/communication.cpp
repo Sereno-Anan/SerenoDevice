@@ -1,19 +1,29 @@
 #include "communication.hpp"
-const int capacity = JSON_OBJECT_SIZE(10); //JsonKeyの数
+
+void Communication::setWiFi(char *wifi_ssid, char *wifi_password)
+{
+    ssid = wifi_ssid;
+    password = wifi_password;
+}
+
+void Communication::setHost(char *url){
+    host = url;
+}
+
 void Communication::connectWiFi()
 {
-    WiFi.begin(wifi_ssid, wifi_password);
+    WiFi.begin(ssid, password);
     while (WiFi.status() != WL_CONNECTED)
     {
         delay(500);
     }
 }
-StaticJsonDocument<capacity> Communication::post(StaticJsonDocument<capacity> json_request)
+StaticJsonDocument<JSON_OBJECT_SIZE(10)> Communication::post(StaticJsonDocument<JSON_OBJECT_SIZE(10)> json_request)
 {
     char buffer[255];
     serializeJson(json_request, Serial);
     serializeJson(json_request, buffer, sizeof(buffer));
-    http.begin(url);
+    http.begin(host);
     http.addHeader("Content-Type", "application/json");
     int status_code = http.POST((uint8_t *)buffer, strlen(buffer));
     if (status_code == 201)
