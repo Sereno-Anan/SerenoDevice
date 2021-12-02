@@ -2,12 +2,12 @@
 #include <ArduinoJson.h>
 #include "Wi-Fi.h"
 #include "communication.hpp"
-
+#include "info.h"
 char *ssid = wifi_ssid;
 char *password = wifi_password;
 char *url = host_url;
+const int capacity = JSON_OBJECT_SIZE(10);  //keyの数を定義
 Communication com;
-const int capacity = JSON_OBJECT_SIZE(10); // JsonKeyの最大数を定義
 
 void setup()
 {
