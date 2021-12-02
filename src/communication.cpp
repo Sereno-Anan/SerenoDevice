@@ -1,12 +1,13 @@
 #include "communication.hpp"
 
-void Communication::setWiFi(char *wifi_ssid, char *wifi_password)
+void Communication::setWiFi(char *ssid, char *password)
 {
-    ssid = wifi_ssid;
-    password = wifi_password;
+    this->ssid = ssid;
+    this->password = password;
 }
 
-void Communication::setHost(char *url){
+void Communication::setHost(char *url)
+{
     host = url;
 }
 

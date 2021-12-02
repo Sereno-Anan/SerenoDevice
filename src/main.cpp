@@ -1,21 +1,23 @@
 #include <M5StickC.h>
-#include <Wi-Fi.h>
-#include "Wi-Fi.h"
-#include <communication.hpp>
 #include <ArduinoJson.h>
+#include "Wi-Fi.h"
+#include "communication.hpp"
 
-const char *ssid = wifi_ssid;
-const char *password = wifi_password;
-const int capacity = JSON_OBJECT_SIZE(10);
+char *ssid = wifi_ssid;
+char *password = wifi_password;
+char *url = host_url;
+Communication com;
+const int capacity = JSON_OBJECT_SIZE(10); // JsonKeyの最大数を定義
 
 void setup()
 {
   M5.begin();
+  com.setWiFi(ssid, password);
+  com.connectWiFi();
+  com.setHost(url);
   StaticJsonDocument<capacity> json_request;
   json_request["btn"] = "ABCD";
   json_request["time"] = 2;
-  Communication com;
-  com.connectWiFi();
   StaticJsonDocument<capacity> json_response = com.post(json_request);
 }
 
