@@ -1,5 +1,5 @@
 #include "communication.hpp"
-const int capacity = 10; //JsonKeyの数
+const int capacity = JSON_OBJECT_SIZE(10); //JsonKeyの数
 void Communication::connectWiFi()
 {
     WiFi.begin(wifi_ssid, wifi_password);
@@ -8,7 +8,7 @@ void Communication::connectWiFi()
         delay(500);
     }
 }
-StaticJsonDocument<JSON_OBJECT_SIZE(capacity)> Communication::post(StaticJsonDocument<JSON_OBJECT_SIZE(capacity)> json_request)
+StaticJsonDocument<capacity> Communication::post(StaticJsonDocument<capacity> json_request)
 {
     char buffer[255];
     serializeJson(json_request, Serial);

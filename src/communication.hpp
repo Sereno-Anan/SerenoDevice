@@ -13,5 +13,5 @@ private:
     HTTPClient http;
 public:
     void connectWiFi(); //WiFiに接続
-    StaticJsonDocument<JSON_OBJECT_SIZE(capacity)> post(StaticJsonDocument<JSON_OBJECT_SIZE(capacity)> json_request);  //APIをたたく
+    StaticJsonDocument<capacity> post(StaticJsonDocument<capacity> json_request);  //APIをたたく
 };
