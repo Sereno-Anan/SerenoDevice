@@ -8,8 +8,8 @@ char *ssid = wifi_ssid;
 char *password = wifi_password;
 char *url = host_url;
 Communication com;
-StaticJsonDocument<request_key> json_request;
-StaticJsonDocument<response_key> json_response;
+StaticJsonDocument<JSON_OBJECT_SIZE(request_key)> json_request;
+StaticJsonDocument<JSON_OBJECT_SIZE(response_key)> json_response;
 
 void setup()
 {
@@ -17,13 +17,14 @@ void setup()
   com.setWiFi(ssid, password);
   com.connectWiFi();
   com.setHost(url);
-  
-  json_request["btn"] = "AAAA";
-  json_request["time"] = 5;
-  json_response = com.post(json_request);
 }
 
 void loop()
 {
+  /*
+  json_request["weather"] = "rain";
+  json_request["time"] = 100;
+  */
+  json_response = com.post(json_request);
   delay(500);
 }

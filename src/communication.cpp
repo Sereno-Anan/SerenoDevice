@@ -1,5 +1,4 @@
 #include "communication.hpp"
-#include <M5StickC.h>
 
 void Communication::setWiFi(char *ssid, char *password)
 {
@@ -27,7 +26,6 @@ StaticJsonDocument<JSON_OBJECT_SIZE(response_key)> Communication::post(StaticJso
     http.begin(host);
     http.addHeader("Content-Type", "application/json");
     int status_code = http.POST((uint8_t *)buffer, strlen(buffer));
-    M5.Lcd.printf("%d", status_code);
     if (status_code == 201)
     {
         Stream *resp = http.getStreamPtr();
