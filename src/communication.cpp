@@ -19,7 +19,7 @@ void Communication::connectWiFi()
         delay(500);
     }
 }
-StaticJsonDocument<JSON_OBJECT_SIZE(10)> Communication::post(StaticJsonDocument<JSON_OBJECT_SIZE(10)> json_request)
+StaticJsonDocument<JSON_OBJECT_SIZE(response_key)> Communication::post(StaticJsonDocument<JSON_OBJECT_SIZE(request_key)> json_request)
 {
     char buffer[255];
     serializeJson(json_request, buffer, sizeof(buffer));
