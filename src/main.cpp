@@ -17,14 +17,13 @@ void setup()
   com.setWiFi(ssid, password);
   com.connectWiFi();
   com.setHost(url);
+  
+  json_request["btn"] = "AAAA";
+  json_request["time"] = 5;
+  json_response = com.post(json_request);
 }
 
 void loop()
 {
-  /*
-  json_request["rain"] = "true";
-  json_request["time"] = 2;
-  json_response = com.post(json_request);
-  */
   delay(500);
 }
