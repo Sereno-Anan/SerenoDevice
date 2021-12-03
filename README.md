@@ -22,9 +22,9 @@ code .
 ```cpp
 #include "Wi-Fi.h"
 
-char *wifi_ssid = "";
-char *wifi_password = "";
-char *host_url = "";
+char *wifi_ssid = "test";
+char *wifi_password = "test";
+char *host_url = "test";
 ```
 
 - Platform IO でビルドする．
