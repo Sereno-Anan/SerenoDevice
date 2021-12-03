@@ -2,7 +2,6 @@
 #include <ArduinoJson.h>
 #include "Wi-Fi.h"
 #include "communication.hpp"
-#include "info.h"
 char *ssid = wifi_ssid;
 char *password = wifi_password;
 char *url = host_url;

@@ -22,7 +22,6 @@ void Communication::connectWiFi()
 StaticJsonDocument<JSON_OBJECT_SIZE(10)> Communication::post(StaticJsonDocument<JSON_OBJECT_SIZE(10)> json_request)
 {
     char buffer[255];
-    serializeJson(json_request, Serial);
     serializeJson(json_request, buffer, sizeof(buffer));
     http.begin(host);
     http.addHeader("Content-Type", "application/json");
