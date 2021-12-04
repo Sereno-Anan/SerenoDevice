@@ -7,7 +7,7 @@
 char *ssid = wifi_ssid;
 char *password = wifi_password;
 char *url = host_url;
-PostAPI pos;
+PostAPI api;
 StaticJsonDocument<JSON_OBJECT_SIZE(request_key)> json_request;
 StaticJsonDocument<JSON_OBJECT_SIZE(response_key)> json_response;
 
@@ -19,7 +19,7 @@ void setup()
   {
     delay(500);
   }
-  pos.setHost(url);
+  api.setHost(url);
 }
 
 void loop()
@@ -29,6 +29,6 @@ void loop()
   json_request["weather"] = "rain";
   json_request["time"] = 100;
   */
-  json_response = pos.post(json_request);
+  json_response = api.post(json_request);
   delay(500);
 }
