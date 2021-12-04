@@ -1,5 +1,5 @@
 #include "postAPI.hpp"
-
+#include <M5StickC.h>
 void PostAPI::setHost(char *url)
 {
     host = url;

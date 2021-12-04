@@ -7,7 +7,7 @@
 char *ssid = wifi_ssid;
 char *password = wifi_password;
 char *url = host_url;
-PostAPI post;
+PostAPI pos;
 StaticJsonDocument<JSON_OBJECT_SIZE(request_key)> json_request;
 StaticJsonDocument<JSON_OBJECT_SIZE(response_key)> json_response;
 
@@ -19,15 +19,16 @@ void setup()
   {
     delay(500);
   }
-  post.setHost(url);
+  pos.setHost(url);
 }
 
 void loop()
 {
-  if(M5.BtnB.isPressed()){
-  json_request["btn"] = "rain";
+  M5.update();
+  /*
+  json_request["weather"] = "rain";
   json_request["time"] = 100;
-  json_response = post.post(json_request);
-  }
+  */
+  json_response = pos.post(json_request);
   delay(500);
 }
