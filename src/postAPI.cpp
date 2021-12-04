@@ -1,25 +1,11 @@
-#include "communication.hpp"
+#include "postAPI.hpp"
 
-void Communication::setWiFi(char *ssid, char *password)
-{
-    this->ssid = ssid;
-    this->password = password;
-}
-
-void Communication::setHost(char *url)
+void PostAPI::setHost(char *url)
 {
     host = url;
 }
 
-void Communication::connectWiFi()
-{
-    WiFi.begin(ssid, password);
-    while (WiFi.status() != WL_CONNECTED)
-    {
-        delay(500);
-    }
-}
-StaticJsonDocument<JSON_OBJECT_SIZE(response_key)> Communication::post(StaticJsonDocument<JSON_OBJECT_SIZE(request_key)> json_request)
+StaticJsonDocument<JSON_OBJECT_SIZE(response_key)> PostAPI::post(StaticJsonDocument<JSON_OBJECT_SIZE(request_key)> json_request)
 {
     char buffer[255];
     serializeJson(json_request, buffer, sizeof(buffer));
