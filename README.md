@@ -24,6 +24,7 @@ code .
 
 char *wifi_ssid = "";
 char *wifi_password = "";
+char *host_url = "";
 ```
 
 - Platform IO でビルドする．
