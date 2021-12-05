@@ -2,9 +2,9 @@
 #define COMMUNICATION_HPP
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
-#include "key.cpp"
+#include "json_key.cpp"
 
-class PostAPI
+class SheetDB
 {
 private:
     HTTPClient http;

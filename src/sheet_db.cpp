@@ -1,10 +1,10 @@
-#include "postAPI.hpp"
-void PostAPI::setHost(char *url)
+#include "sheet_db.hpp"
+void SheetDB::setHost(char *url)
 {
     host = url;
 }
 
-StaticJsonDocument<JSON_OBJECT_SIZE(response_key)> PostAPI::post(StaticJsonDocument<JSON_OBJECT_SIZE(request_key)> json_request)
+StaticJsonDocument<JSON_OBJECT_SIZE(response_key)> SheetDB::post(StaticJsonDocument<JSON_OBJECT_SIZE(request_key)> json_request)
 {
     char buffer[255];
     serializeJson(json_request, buffer, sizeof(buffer));
