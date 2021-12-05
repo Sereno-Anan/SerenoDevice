@@ -1,5 +1,5 @@
-#ifndef COMMUNICATION_HPP
-#define COMMUNICATION_HPP
+#ifndef SHEET_DB_HPP
+#define SHEET_DB_HPP
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 #include "json_key.cpp"
