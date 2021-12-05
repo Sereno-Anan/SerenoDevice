@@ -20,14 +20,15 @@ void setup()
     delay(500);
   }
   sheetDB.setHost(url);
-  
-  json_request["weather"] = "rain";
-  json_request["time"] = 100;
-  json_response = sheetDB.post(json_request);
 }
 
 void loop()
 {
   M5.update();
+  /*
+  json_request["weather"] = "rain";
+  json_request["time"] = 100;
+  */
+  json_response = sheetDB.post(json_request);
   delay(500);
 }
