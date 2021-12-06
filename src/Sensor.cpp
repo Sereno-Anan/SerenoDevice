@@ -9,7 +9,7 @@ void Sensor::setPin(int set)
 
 int Sensor::getValue()
 {
-    if (analogRead(PIN) > 100)
+    if (analogRead(PIN) > 1000)
     {
         return 1;
     }
