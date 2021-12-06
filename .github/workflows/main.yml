@@ -38,7 +38,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2    
     - name: copy google-service.json
-      run: echo ${{ secrets.ENV }} | base64 --decode --ignore-garbage > ./src/.cpp
+      run: echo ${{ secrets.ENV }} | base64 --decode --ignore-garbage > ./src/env.cpp
     - name: Install PlatformIO
       run: |
         python -m pip install --upgrade pip
