@@ -1,15 +1,15 @@
 #include <M5StickC.h>
-#include "Sensor.hpp"
+#include "sensor.hpp"
 
 void Sensor::setPin(int set)
 {
-    PIN = set;
-    pinMode(PIN, ANALOG);
+    pin = set;
+    pinMode(pin, ANALOG);
 }
 
 int Sensor::getValue()
 {
-    if (analogRead(PIN) > 1000)
+    if (analogRead(pin) > 1000)
     {
         return 1;
     }

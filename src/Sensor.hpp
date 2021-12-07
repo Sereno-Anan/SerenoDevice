@@ -6,7 +6,7 @@
 class Sensor
 {
 private:
-    int PIN;
+    int pin;
 
 public:
     void setPin(int set);//引数は入力PIN
