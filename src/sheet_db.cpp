@@ -16,7 +16,6 @@ StaticJsonDocument<JSON_OBJECT_SIZE(response_key)> SheetDB::post(StaticJsonDocum
         Stream *resp = http.getStreamPtr();
         DynamicJsonDocument json_response(255);
         deserializeJson(json_response, *resp);
-        serializeJson(json_response, Serial);
         return json_response;
     }
     else
