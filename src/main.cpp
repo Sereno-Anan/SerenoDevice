@@ -67,10 +67,22 @@ void setup()
 void loop()
 {
   M5.update();
-  /*
-  json_request["weather"] = "rain";
-  json_request["time"] = 100;
-  */
-  json_response = sheetDB.post(json_request);
-  delay(500);
+  // json_request["weather"] = "rain";
+  // json_request["time"] = 100;
+  // json_response = sheetDB.post(json_request);
+
+  // delay(500);
+
+  if (Firebase.ready() && (millis() - sendDataPrevMillis > 15000 || sendDataPrevMillis == 0))
+  {
+    sendDataPrevMillis = millis();
+    FirebaseJson json;
+    
+    json.set("raindrops/timestamp/.sv", "timestamp");
+    json.set("raindrops/status/", count % 2 == 0);
+    Serial.printf("Update node... %s\n", Firebase.RTDB.updateNode(&fbdo, "/", &json) ? "ok" : fbdo.errorReason().c_str());
+
+    Serial.println();
+    count++;
+  }
 }
