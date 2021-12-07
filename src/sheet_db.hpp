@@ -8,10 +8,10 @@ class SheetDB
 {
 private:
     HTTPClient http;
-    char *host;
+    const char *host;
 
 public:
-    void setHost(char *url);
+    void setHost(const char *url);
     StaticJsonDocument<JSON_OBJECT_SIZE(response_key)> post(StaticJsonDocument<JSON_OBJECT_SIZE(request_key)> json_request); // APIをたたく
 };
 #endif
