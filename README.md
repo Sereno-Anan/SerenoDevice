@@ -25,6 +25,10 @@ code .
 char *wifi_ssid = "";
 char *wifi_password = "";
 char *host_url = "";
+String firebase_api_key = "";
+String firebase_rtdb_url = "";
+String firebase_user_email = "";
+String firebase_user_password = "";
 ```
 
 - Platform IO でビルドする．
