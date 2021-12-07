@@ -12,7 +12,7 @@
 #include <addons/TokenHelper.h>
 #include <addons/RTDBHelper.h>
 
-// define Firebase
+// Define Firebase variables
 #define WIFI_SSID wifi_ssid
 #define WIFI_PASSWORD wifi_password
 #define API_KEY firebase_api_key
@@ -20,14 +20,14 @@
 #define USER_EMAIL firebase_user_email
 #define USER_PASSWORD firebase_user_password
 
-unsigned long sendDataPrevMillis = 0;
-unsigned long count = 0;
-
 // Define Firebase object
 FirebaseData fbdo;
 FirebaseAuth auth;
 FirebaseConfig config;
+unsigned long sendDataPrevMillis = 0;
+unsigned long count = 0;
 
+// Define SheetDB object
 const char *url = host_url;
 SheetDB sheetDB;
 StaticJsonDocument<JSON_OBJECT_SIZE(request_key)> json_request;
