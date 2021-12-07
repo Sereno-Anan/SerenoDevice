@@ -1,8 +1,6 @@
 #ifndef SENSOR_HPP
 #define SENSOR_HPP
 
-#include <M5StickC.h>
-
 class Sensor
 {
 private:

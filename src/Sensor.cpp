@@ -1,3 +1,4 @@
+#include <M5StickC.h>
 #include "sensor.hpp"
 
 void Sensor::setPin(int set)
