@@ -28,8 +28,6 @@ FirebaseData fbdo;
 FirebaseAuth auth;
 FirebaseConfig config;
 
-const char *ssid = wifi_ssid;
-const char *password = wifi_password;
 const char *url = host_url;
 SheetDB sheetDB;
 StaticJsonDocument<JSON_OBJECT_SIZE(request_key)> json_request;
