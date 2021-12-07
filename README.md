@@ -20,11 +20,11 @@ code .
 - `src/env.cpp` に以下を追加する
 
 ```cpp
-#include "env.h"
+#include "WString.h"
 
-char *wifi_ssid = "";
-char *wifi_password = "";
-char *host_url = "";
+const char *wifi_ssid = "";
+const char *wifi_password = "";
+const char *host_url = "";
 String firebase_api_key = "";
 String firebase_rtdb_url = "";
 String firebase_user_email = "";
