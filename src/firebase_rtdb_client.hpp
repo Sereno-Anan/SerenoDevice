@@ -1,6 +1,4 @@
 #include <Firebase_ESP_Client.h>
-#include <addons/TokenHelper.h>
-#include <addons/RTDBHelper.h>
 #include "env.h"
 #include <WiFi.h>
 

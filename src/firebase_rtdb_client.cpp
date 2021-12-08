@@ -7,7 +7,6 @@ FirebaseRTDBClient::FirebaseRTDBClient()
     auth.user.email = firebase_user_email;
     auth.user.password = firebase_user_password;
     config.database_url = firebase_rtdb_url;
-    config.token_status_callback = tokenStatusCallback;
 }
 
 void FirebaseRTDBClient::begin(){
