@@ -28,10 +28,11 @@ void setup()
 void loop()
 {
   M5.update();
-  /*
-  json_request["weather"] = sensor.getValue();
-  json_request["time"] = 100;
-  */
+  if(M5.BtnA.isPressed())
+  {
+    json_request["rain"] = sensor.getValue();
+    json_request["time"] = 100;
+  }
   json_response = sheetDB.post(json_request);
   delay(500);
 }
