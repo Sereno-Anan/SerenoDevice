@@ -77,7 +77,8 @@ void loop()
   // json_response = sheetDB.post(json_request);
 
   // delay(500);
-
+    FirebaseJson json;
+    json.set("raindrops/timestamp/.sv", "timestamp");
   if ((millis() - sendDataPrevMillis > 15000 || sendDataPrevMillis == 0))
   {
     sendDataPrevMillis = millis();
@@ -90,7 +91,9 @@ void loop()
 
     Serial.println();
     */
-   firebaseRTDBClient.updateRTDB(count % 2 == 0);
+   
+    json.set("raindrops/status/", count % 2 == 0);
+   firebaseRTDBClient.updateRTDB(json);
     count++;
   }
 }

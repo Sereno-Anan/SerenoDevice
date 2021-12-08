@@ -15,12 +15,9 @@ void FirebaseRTDBClient::begin(){
     Firebase.reconnectWiFi(true);
 }
 
-void FirebaseRTDBClient::updateRTDB(bool status)
+void FirebaseRTDBClient::updateRTDB(FirebaseJson json)
 {
-    while(Firebase.ready());
-    FirebaseJson json;
-    json.set("raindrops/timestamp/.sv", "timestamp");
-    json.set("raindrops/status/", status);
+    while(!Firebase.ready());
     Serial.printf("Update node... %s\n", Firebase.RTDB.updateNode(&fbdo, "/", &json) ? "ok" : fbdo.errorReason().c_str());
     Serial.println();
 }
