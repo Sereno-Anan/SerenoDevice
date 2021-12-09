@@ -11,6 +11,9 @@
 #include <addons/TokenHelper.h>
 #include <addons/RTDBHelper.h>
 
+// Sensor
+#include "sensor.hpp"
+
 // Define Firebase variables
 #define WIFI_SSID wifi_ssid
 #define WIFI_PASSWORD wifi_password
@@ -27,11 +30,13 @@ StaticJsonDocument<JSON_OBJECT_SIZE(response_key)> json_response;
 // Define FirebaseRTDBClient object
 FirebaseRTDBClient firebaseRTDBClient;
 
+// Define Sensor
+Sensor sensor;
+
 void setup()
 {
   M5.begin();
   Serial.begin(115200);
-
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("\nConnecting to Wi-Fi");
   while (WiFi.status() != WL_CONNECTED)
@@ -48,6 +53,9 @@ void setup()
   // Initialize FirebaseRTDBClient
   firebaseRTDBClient.config.token_status_callback = tokenStatusCallback;
   firebaseRTDBClient.begin();
+
+  // Initialize Sensor
+  sensor.setPin(36);
 }
 
 void loop()
@@ -61,7 +69,7 @@ void loop()
   {
     FirebaseJson json;
     json.set("raindrops/timestamp/.sv", "timestamp");
-    json.set("raindrops/status/", count % 2 == 0);
+    json.set("raindrops/status/", 1 == sensor.getValue());
     firebaseRTDBClient.updateRTDB(json);
     sendDataPrevMillis = millis();
     count++;
