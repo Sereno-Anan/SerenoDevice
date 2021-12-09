@@ -7,8 +7,9 @@ class FirebaseRTDBClient
 private:
     FirebaseData fbdo;
     FirebaseAuth auth;
-    FirebaseConfig config;
+
 public:
-    FirebaseRTDBClient();
+    FirebaseConfig config;
+    void begin();
     void updateRTDB(FirebaseJson json);
 };
