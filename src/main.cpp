@@ -37,7 +37,7 @@ SheetDB sheetDB;
 StaticJsonDocument<JSON_OBJECT_SIZE(request_key)> json_request;
 StaticJsonDocument<JSON_OBJECT_SIZE(response_key)> json_response;
 
-FirebaseRTDBClient firebaseRTDBClient;
+FirebaseRTDBClient * firebaseRTDBClient = new FirebaseRTDBClient();
 void setup()
 {
   M5.begin();
@@ -52,19 +52,26 @@ void setup()
   }
   Serial.print("\nConnected with IP: ");
   Serial.println(WiFi.localIP());
-/*
-  Serial.printf("\nFirebase Client v%s\n", FIREBASE_CLIENT_VERSION);
 
-  config.api_key = API_KEY;
-  auth.user.email = USER_EMAIL;
-  auth.user.password = USER_PASSWORD;
-  config.database_url = DATABASE_URL;
+  
+  FirebaseJson json;
+  json.set("raindrops/timestamp/.sv", "timestamp");
+  json.set("raindrops/status/", true);
+  Serial.print("a");
+  firebaseRTDBClient->updateRTDB(json);
+  /*
+    Serial.printf("\nFirebase Client v%s\n", FIREBASE_CLIENT_VERSION);
 
-  // Assign the callback function for the long running token generation task
-  config.token_status_callback = tokenStatusCallback;
-  Firebase.begin(&config, &auth);
-  Firebase.reconnectWiFi(true);
-*/
+    config.api_key = API_KEY;
+    auth.user.email = USER_EMAIL;
+    auth.user.password = USER_PASSWORD;
+    config.database_url = DATABASE_URL;
+
+    // Assign the callback function for the long running token generation task
+    config.token_status_callback = tokenStatusCallback;
+    Firebase.begin(&config, &auth);
+    Firebase.reconnectWiFi(true);
+  */
   // Initialize SheetDB
   sheetDB.setHost(url);
 }
@@ -77,23 +84,21 @@ void loop()
   // json_response = sheetDB.post(json_request);
 
   // delay(500);
-    FirebaseJson json;
-    json.set("raindrops/timestamp/.sv", "timestamp");
+  FirebaseJson json;
+  json.set("raindrops/timestamp/.sv", "timestamp");
   if ((millis() - sendDataPrevMillis > 15000 || sendDataPrevMillis == 0))
   {
     sendDataPrevMillis = millis();
     /*
     FirebaseJson json;
-    
+
     json.set("raindrops/timestamp/.sv", "timestamp");
     json.set("raindrops/status/", count % 2 == 0);
     Serial.printf("Update node... %s\n", Firebase.RTDB.updateNode(&fbdo, "/", &json) ? "ok" : fbdo.errorReason().c_str());
 
     Serial.println();
     */
-   
-    json.set("raindrops/status/", count % 2 == 0);
-   firebaseRTDBClient.updateRTDB(json);
+
     count++;
   }
 }

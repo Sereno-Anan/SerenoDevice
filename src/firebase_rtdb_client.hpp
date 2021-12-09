@@ -10,6 +10,5 @@ private:
     FirebaseConfig config;
 public:
     FirebaseRTDBClient();
-    void begin();
     void updateRTDB(FirebaseJson json);
 };

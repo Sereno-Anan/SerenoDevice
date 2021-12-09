@@ -7,16 +7,17 @@ FirebaseRTDBClient::FirebaseRTDBClient()
     auth.user.email = firebase_user_email;
     auth.user.password = firebase_user_password;
     config.database_url = firebase_rtdb_url;
-}
-
-void FirebaseRTDBClient::begin(){
+    Serial.print("1");
     Firebase.begin(&config, &auth);
     Firebase.reconnectWiFi(true);
 }
 
 void FirebaseRTDBClient::updateRTDB(FirebaseJson json)
 {
-    while(!Firebase.ready());
+    while(!Firebase.ready()){
+        Serial.print(Firebase.ready());
+        delay(100);
+    }
     Serial.printf("Update node... %s\n", Firebase.RTDB.updateNode(&fbdo, "/", &json) ? "ok" : fbdo.errorReason().c_str());
     Serial.println();
 }
