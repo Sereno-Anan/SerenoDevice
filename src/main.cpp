@@ -52,7 +52,7 @@ void setup()
 
   // Initialize FirebaseRTDBClient
   firebaseRTDBClient.config.token_status_callback = tokenStatusCallback;
-  firebaseRTDBClient.begin();
+  firebaseRTDBClient.setup();
 
   // Initialize Sensor
   sensor.setPin(36);

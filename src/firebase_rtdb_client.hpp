@@ -10,6 +10,6 @@ private:
 
 public:
     FirebaseConfig config;
-    void begin();
+    void setup();
     void updateRTDB(FirebaseJson json);
 };

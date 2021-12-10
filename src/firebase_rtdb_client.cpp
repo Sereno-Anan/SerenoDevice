@@ -1,6 +1,6 @@
 #include "firebase_rtdb_client.hpp"
 
-void FirebaseRTDBClient::begin()
+void FirebaseRTDBClient::setup()
 {
     Serial.printf("\nFirebase Client v%s\n", FIREBASE_CLIENT_VERSION);
     config.api_key = firebase_api_key;
