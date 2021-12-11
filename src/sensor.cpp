@@ -8,7 +8,7 @@ void Sensor::setPin(int set)
     pinMode(pin, ANALOG);
 }
 
-int Sensor::getValue()
+bool Sensor::getStatus()
 {
     time_t endTime;
     int i = 0;
@@ -25,10 +25,10 @@ int Sensor::getValue()
 
     if (averageValue > 1000)
     {
-        return 1;
+        return true;
     }
     else
     {
-        return 0;
+        return false;
     }
 }

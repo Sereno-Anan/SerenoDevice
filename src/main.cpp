@@ -19,8 +19,8 @@
 #define WIFI_PASSWORD wifi_password
 #define DEBUG_MODE true
 #define INTERVAL_TIME 1
-RTC_DATA_ATTR static int lastValue = -1;
-int value;
+RTC_DATA_ATTR static bool lastSensorStatus = false;
+bool sensorStatus;
 
 // Define SheetDB object
 const char *url = host_url;
@@ -44,15 +44,15 @@ void setup()
 
     // Initialize Sensor
     sensor.setPin(36);
-    value = sensor.getValue();
+    sensorStatus = sensor.getStatus();
 
     // センサの値が前回更新した値と等しいときは処理をスキップ
-    if (value == lastValue && DEBUG_MODE == false)
+    if (sensorStatus == lastSensorStatus && DEBUG_MODE == false)
     {
         setCpuFrequencyMhz(20);
         esp_deep_sleep(1000000LL * 60 * INTERVAL_TIME);
     }
-    lastValue = value;
+    lastSensorStatus = sensorStatus;
 
     Serial.begin(115200);
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
@@ -73,7 +73,7 @@ void setup()
     firebaseRTDBClient.setup();
 
     json.set("raindrops/timestamp/.sv", "timestamp");
-    json.set("raindrops/status/", 1 == value);
+    json.set("raindrops/status/", sensorStatus);
     firebaseRTDBClient.updateRTDB(json);
 
     setCpuFrequencyMhz(20);
