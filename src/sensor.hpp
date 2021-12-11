@@ -6,6 +6,7 @@ class Sensor
 private:
     int pin;
     int i;
+    time_t startTime, endTime;
     int totalValue;
     int averageValue;
 
