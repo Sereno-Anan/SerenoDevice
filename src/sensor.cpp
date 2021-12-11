@@ -11,9 +11,9 @@ void Sensor::setPin(int set)
 int Sensor::getValue()
 {
     time_t endTime;
-    int i=0;
-    int totalValue=0;
-    int averageValue=0;
+    int i = 0;
+    int totalValue = 0;
+    int averageValue = 0;
     endTime = time(NULL) + 30;
     while (time(NULL) < endTime)
     {
