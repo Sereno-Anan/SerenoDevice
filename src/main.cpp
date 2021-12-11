@@ -16,7 +16,8 @@
 
 RTC_DATA_ATTR static int lastValue = -1; // remember number in RTC Memory
 
-#define INTERVAL_TIME 10
+#define DEBUG_MODE true
+#define INTERVAL_TIME 1
 
 // Define Firebase variables
 #define WIFI_SSID wifi_ssid
@@ -43,7 +44,7 @@ void setup()
   // Initialize Sensor
   sensor.setPin(36);
   value = sensor.getValue();
-  if (value == lastValue) //  センサの値が前回更新した値と等しいとき
+  if (value == lastValue && DEBUG_MODE == false) //  センサの値が前回更新した値と等しいとき
   {
     setCpuFrequencyMhz(20);
     esp_deep_sleep(1000000LL * 60 * INTERVAL_TIME);
