@@ -10,11 +10,11 @@ void Sensor::setPin(int set)
 
 int Sensor::getValue()
 {
-    startTime = time(NULL);
-    endTime = startTime + 30;
     i = 0;
     averageValue = 0;
     totalValue = 0;
+    startTime = time(NULL);
+    // endTime = 
     while (startTime > endTime)
     {
         totalValue = totalValue + analogRead(pin);
