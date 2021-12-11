@@ -1,5 +1,6 @@
 #include <M5StickC.h>
 #include "sensor.hpp"
+#include <time.h>
 
 void Sensor::setPin(int set)
 {
@@ -9,7 +10,20 @@ void Sensor::setPin(int set)
 
 int Sensor::getValue()
 {
-    if (analogRead(pin) > 1000)
+    time_t endTime;
+    int i = 0;
+    int totalValue = 0;
+    int averageValue = 0;
+    measureTime = 30;
+    endTime = time(NULL) + measureTime;
+    while (time(NULL) < endTime)
+    {
+        totalValue = totalValue + analogRead(pin);
+        i++;
+    }
+    averageValue = totalValue / i;
+
+    if (averageValue > 1000)
     {
         return 1;
     }
