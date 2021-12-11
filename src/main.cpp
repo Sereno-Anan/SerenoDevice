@@ -61,8 +61,17 @@ void setup()
 void loop()
 {
   M5.update();
-  json_request["rain"] = sensor.getValue();
-  json_request["time"] = 100;
-  json_response = sheetDB.post(json_request);
-  delay(500);
+  // json_request["weather"] = "rain";
+  // json_request["time"] = 100;
+  // json_response = sheetDB.post(json_request);
+
+  if ((millis() - sendDataPrevMillis > 15000 || sendDataPrevMillis == 0))
+  {
+    FirebaseJson json;
+    json.set("raindrops/timestamp/.sv", "timestamp");
+    json.set("raindrops/status/", 1 == sensor.getValue());
+    firebaseRTDBClient.updateRTDB(json);
+    sendDataPrevMillis = millis();
+    count++;
+  }
 }

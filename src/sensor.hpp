@@ -5,6 +5,7 @@ class Sensor
 {
 private:
     int pin;
+    int measureTime;
 
 public:
     void setPin(int set); //引数は入力PIN

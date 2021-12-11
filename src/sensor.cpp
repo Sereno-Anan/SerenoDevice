@@ -14,7 +14,8 @@ int Sensor::getValue()
     int i = 0;
     int totalValue = 0;
     int averageValue = 0;
-    endTime = time(NULL) + 30;
+    measureTime = 30;
+    endTime = time(NULL) + measureTime;
     while (time(NULL) < endTime)
     {
         totalValue = totalValue + analogRead(pin);
