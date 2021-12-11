@@ -14,28 +14,43 @@
 // Sensor
 #include "sensor.hpp"
 
+RTC_DATA_ATTR static int lastValue = -1; // remember number in RTC Memory
+
+#define DEBUG_MODE true
+#define INTERVAL_TIME 1
+
 // Define Firebase variables
 #define WIFI_SSID wifi_ssid
 #define WIFI_PASSWORD wifi_password
-
-unsigned long sendDataPrevMillis = 0;
-unsigned long count = 0;
 
 // Define SheetDB object
 const char *url = host_url;
 SheetDB sheetDB;
 StaticJsonDocument<JSON_OBJECT_SIZE(request_key)> json_request;
 StaticJsonDocument<JSON_OBJECT_SIZE(response_key)> json_response;
-
 // Define FirebaseRTDBClient object
 FirebaseRTDBClient firebaseRTDBClient;
-
+FirebaseJson json;
 // Define Sensor
 Sensor sensor;
 
+int value;
+
 void setup()
 {
-  M5.begin();
+  setCpuFrequencyMhz(80);
+  M5.begin(false, true, true);
+  M5.Axp.ScreenBreath(0);
+  // Initialize Sensor
+  sensor.setPin(36);
+  value = sensor.getValue();
+  if (value == lastValue && DEBUG_MODE == false) //  センサの値が前回更新した値と等しいとき
+  {
+    setCpuFrequencyMhz(20);
+    esp_deep_sleep(1000000LL * 60 * INTERVAL_TIME);
+  }
+  lastValue = value;
+
   Serial.begin(115200);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("\nConnecting to Wi-Fi");
@@ -54,24 +69,14 @@ void setup()
   firebaseRTDBClient.config.token_status_callback = tokenStatusCallback;
   firebaseRTDBClient.setup();
 
-  // Initialize Sensor
-  sensor.setPin(36);
+  json.set("raindrops/timestamp/.sv", "timestamp");
+  json.set("raindrops/status/", 1 == value);
+  firebaseRTDBClient.updateRTDB(json);
+
+  setCpuFrequencyMhz(20);
+  esp_deep_sleep(1000000LL * 60 * INTERVAL_TIME);
 }
 
 void loop()
 {
-  M5.update();
-  // json_request["weather"] = "rain";
-  // json_request["time"] = 100;
-  // json_response = sheetDB.post(json_request);
-
-  if ((millis() - sendDataPrevMillis > 15000 || sendDataPrevMillis == 0))
-  {
-    FirebaseJson json;
-    json.set("raindrops/timestamp/.sv", "timestamp");
-    json.set("raindrops/status/", 1 == sensor.getValue());
-    firebaseRTDBClient.updateRTDB(json);
-    sendDataPrevMillis = millis();
-    count++;
-  }
 }
