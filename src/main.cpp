@@ -21,6 +21,7 @@
 #define DEBUG_MODE true
 #define INTERVAL_TIME 1
 RTC_DATA_ATTR static bool lastSensorStatus = false;
+int sensorAnalogValue;
 bool sensorStatus;
 
 // Define SheetDB object
@@ -46,7 +47,8 @@ void setup()
 
     // Initialize Sensor
     sensor.setPin(36);
-    sensorStatus = sensor.getStatus();
+    sensorAnalogValue = sensor.getStatus();
+    sensorStatus = sensorAnalogValue > 1000;
 
     // センサの値が前回更新した値と等しいときは処理をスキップ
     if (sensorStatus == lastSensorStatus && DEBUG_MODE == false)
@@ -93,6 +95,7 @@ void setup()
             timeInfo.tm_hour - 9, timeInfo.tm_min, timeInfo.tm_sec);
     json.set("fields/createdAt/timestampValue", now);
     json.set("fields/status/booleanValue", sensorStatus);
+    json.set("fields/analogValue/integerValue", sensorAnalogValue);
 
     firestoreClient.addDocument(firebase_project_id, documentPath, json);
 
