@@ -15,7 +15,8 @@ void FirebaseRTDBClient::setup()
 
 void FirebaseRTDBClient::updateRTDB(FirebaseJson json)
 {
-    while (!Firebase.ready());
+    while (!Firebase.ready())
+        ;
     Serial.printf("Update node... %s\n", Firebase.RTDB.updateNode(&fbdo, "/", &json) ? "ok" : fbdo.errorReason().c_str());
     Serial.println();
 }
