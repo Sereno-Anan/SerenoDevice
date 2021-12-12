@@ -25,6 +25,7 @@ code .
 const char *wifi_ssid = "";
 const char *wifi_password = "";
 const char *host_url = "";
+String firebase_project_id = "";
 String firebase_api_key = "";
 String firebase_rtdb_url = "";
 String firebase_user_email = "";
