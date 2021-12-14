@@ -2,36 +2,19 @@
 #include "env.h"
 
 // Firebase ESP Client
-#include "firebase_rtdb_client.hpp"
 #include "firestore_client.hpp"
 #include <addons/TokenHelper.h>
-#include <addons/RTDBHelper.h>
-
-// SheetDB
-#include <ArduinoJson.h>
-#include "sheet_db.hpp"
-#include "json_key.cpp"
-
-// Sensor
-#include "sensor.hpp"
 
 // Define parameters
 #define WIFI_SSID wifi_ssid
 #define WIFI_PASSWORD wifi_password
 #define DEBUG_MODE true
-#define INTERVAL_TIME 1
+#define INTERVAL_TIME 5
 RTC_DATA_ATTR static bool lastSensorStatus = false;
 int sensorAnalogValue;
 bool sensorStatus;
 
-// Define SheetDB object
-const char *url = host_url;
-SheetDB sheetDB;
-StaticJsonDocument<JSON_OBJECT_SIZE(request_key)> json_request;
-StaticJsonDocument<JSON_OBJECT_SIZE(response_key)> json_response;
-
-// Define FirebaseRTDBClient object
-FirebaseRTDBClient firebaseRTDBClient;
+// Define FirestoreClient object
 FirestoreClient firestoreClient;
 FirebaseJson json;
 
@@ -70,17 +53,6 @@ void setup()
     Serial.println(WiFi.localIP());
 
     configTime(9 * 3600, 0, "ntp.nict.jp");
-
-    // Initialize SheetDB
-    sheetDB.setHost(url);
-
-    // Initialize FirebaseRTDBClient
-    // firebaseRTDBClient.config.token_status_callback = tokenStatusCallback;
-    // firebaseRTDBClient.setup();
-
-    // json.set("raindrops/timestamp/.sv", "timestamp");
-    // json.set("raindrops/status/", sensorStatus);
-    // firebaseRTDBClient.updateRTDB(json);
 
     firestoreClient.config.token_status_callback = tokenStatusCallback;
     firestoreClient.setup();
