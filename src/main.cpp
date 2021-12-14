@@ -5,6 +5,9 @@
 #include "firestore_client.hpp"
 #include <addons/TokenHelper.h>
 
+// Sensor
+#include "sensor.hpp"
+
 // Define parameters
 #define WIFI_SSID wifi_ssid
 #define WIFI_PASSWORD wifi_password
