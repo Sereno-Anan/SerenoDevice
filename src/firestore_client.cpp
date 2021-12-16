@@ -17,7 +17,7 @@ void FirestoreClient::addDocument(String firebaseProjectId, String documentPath,
     while (!Firebase.ready())
         ;
     if (Firebase.Firestore.createDocument(&fbdo, firebaseProjectId, "" /* databaseId can be (default) or empty */, documentPath.c_str(), json.raw()))
-        Serial.printf("ok\n%s\n\n", fbdo.payload().c_str());
+        Serial.printf("ok\n%s\n", fbdo.payload().c_str());
     else
         Serial.println(fbdo.errorReason());
 }

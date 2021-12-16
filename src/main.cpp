@@ -4,6 +4,7 @@
 // Firebase ESP Client
 #include "firestore_client.hpp"
 #include <addons/TokenHelper.h>
+#include <addons/RTDBHelper.h>
 
 // Sensor
 #include "sensor.hpp"
@@ -13,7 +14,6 @@
 #define WIFI_PASSWORD wifi_password
 #define DEBUG_MODE true
 #define INTERVAL_TIME 5
-RTC_DATA_ATTR static bool lastSensorStatus = false;
 int sensorAnalogValue;
 bool sensorStatus;
 
@@ -36,14 +36,6 @@ void setup()
     sensorAnalogValue = sensor.getStatus();
     sensorStatus = sensorAnalogValue > 1000;
 
-    // センサの値が前回更新した値と等しいときは処理をスキップ
-    if (sensorStatus == lastSensorStatus && DEBUG_MODE == false)
-    {
-        setCpuFrequencyMhz(20);
-        esp_deep_sleep(1000000LL * 60 * INTERVAL_TIME);
-    }
-    lastSensorStatus = sensorStatus;
-
     Serial.begin(115200);
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
     Serial.print("\nConnecting to Wi-Fi");
@@ -60,7 +52,7 @@ void setup()
     firestoreClient.config.token_status_callback = tokenStatusCallback;
     firestoreClient.setup();
 
-    String documentPath = "raindrops";
+    String documentPath = "test1";
 
     struct tm timeInfo;
     getLocalTime(&timeInfo);
